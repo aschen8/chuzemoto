@@ -13,4 +13,4 @@ The _______ API returns a JSON object with a selection  5 of motorcycles that fi
 The _______ API will return these 5 motorcycles, which along with a on.click event will GET more information on the clicked motorcycle from a Google search_______
 
 Technologies Used
-HTML, CSS, JavaScript, jQuery, AJAX, JSON, Bootstrap, Bootswatch, Firebase, Weather Underground API, Punk API
+HTML, CSS, JavaScript, jQuery, AJAX, JSON, Bootstrap, Bootswatch, Firebase
