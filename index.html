@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Chuze Moto</title>
+	<title>Chuze Moto!!!!!</title>
 	<link rel="stylesheet" type="text/css" href="assets/css/reset.css"/>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="https://bootswatch.com/3/united/bootstrap.min.css"/>
@@ -28,9 +28,11 @@
 				<p>Enter your pants inseam below to get a custom motorcycle recommendation!</p>
 			</div>
 
-			<div class="col-sm-12 col-xl-12" id="inputArea">
-				<form class="text-center" id="cityForm">
-					<input type="text" required pattern="[a-zA-Z\s]+" id="userInput" placeholder="Enter your pants inseam">
+			<div class="col-lg-12" id="inputArea">
+				<form class="text-center" id="pantsInseamForm">
+
+					<!-- input type is number only so words dont register -->
+					<input type="number" id="userInput" placeholder="Enter inseam">
 				    <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
 				        <option selected value="default">State</option>
 				    </select>
@@ -41,12 +43,12 @@
 	</div>
 	
 	<div class="row">
-		<div class="col-sm-12 col-lg-12 text-center" id="weatherArea">
+		<div class="col-lg-4 text-center" id="moto-category">
 		</div>
 	</div>
 
 	<div class="row">
-		<div class="col-sm-12 col-lg-12 text-center" id="beerArea">
+		<div class="col-sm-12 col-lg-12 text-center" id="moto-models">
 		</div>
 	</div>
 	
