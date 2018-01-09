@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Chuze Moto</title>
+	<link rel="stylesheet" type="text/css" href="assets/css/reset.css"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="https://bootswatch.com/3/united/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css"/>
+	<script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+</head>
+
+<body>
+	<div class="row topDiv">
+		<header class="col-sm-12 col-xl-12">
+			<h1 class="text-center" id="title">Chuze Moto</h1>
+			<h4 class="header-text text-center" id="slogan">Chuze Moto, we help you choose your Moto!</h4>
+		</header>
+
+		<div class="container">
+			<div class="col-sm-12 col-xl-12 text-center" id="textArea">
+				<p>Chuzemoto: We help you choose the (right) motorcycle for you!<p>
+				<p>Motorcycling can be a lifelong passion of adventure and freedom, but it can be intimidating to know where to start. Chuzemoto helps ease that fear by reccomending beginner-friendly motorcycles that are apropriate for beginning riders.</p>
+				<br/>
+				<br/>
+				<br/>
+				<p>Enter your pants inseam below to get a custom motorcycle recommendation!</p>
+			</div>
+
+			<div class="col-sm-12 col-xl-12" id="inputArea">
+				<form class="text-center" id="cityForm">
+					<input type="text" required pattern="[a-zA-Z\s]+" id="userInput" placeholder="Enter your pants inseam">
+				    <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+				        <option selected value="default">State</option>
+				    </select>
+				    <button type="submit" id="submit-btn" class="btn">Submit</button><span id="errorText"></span>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-sm-12 col-lg-12 text-center" id="weatherArea">
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12 col-lg-12 text-center" id="beerArea">
+		</div>
+	</div>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript" src="assets/javascript/app.js"></script>
+</body>
+</html>
