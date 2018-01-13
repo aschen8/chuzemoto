@@ -1,3 +1,5 @@
+//modeled after https://www.youtube.com/watch?v=ZKwrOXl5TDI&t=384s
+
 var express = require ('express');
 var router = express.Router();
 var mongo = require('mongodb');
