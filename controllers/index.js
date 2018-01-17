@@ -1,54 +1,57 @@
-//modeled after https://www.youtube.com/watch?v=ZKwrOXl5TDI&t=384s
+const express = require ('express');
+//included with nodejs by default, no need to install it
+const path = require('path');
+const mongoose = require('mongoose');
 
-var express = require ('express');
-var router = express.Router();
-var mongo = require('mongodb');
-var bodyparser = require('body-parser');
-//assert is built-in package in node.js
-var assert = require('assert');
-var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost.chuzemoto_motos.motorcycles');
+let db = mongoose.connection;
 
-
-//mongodb port
-var url = 'mongodb://localhost:27017/chuzemoto_motos';
-
-var databaseUrl = 'chuzemoto_motos';
-var collections = ['motorcycles'];
-
-//
-// mongoose.connect("mongodb://localhost/chuzemoto_motos", {
-//   useMongoClient: true
-// // });
-// mongo.connect(url, function(err, db){
-//   	assert.equal(null,err);
-//   	var cursor = db.collection('motorcycles').find();
-//   	cursor.forEach(function(doc, err){
-//   		assert.equal(null,err);
-//   		resultArray.push(doc);
-//   	})
-// });
-
-//GET home page
-router.get('/', function(req, res, next) {
-	res.render('');
+//check connection
+db.once('open',function(){
+  console.log('connected to mongodb');
+});
+//check for db errors
+db.on('error', function(err){
+  console.log:(err);
 });
 
-router.get('get-data', function(req, res, next) {
-var resultArray = [];
-	 mongo.connect(url, function(err,db){
-  	assert.equal(null,err);
-  	var cursor = db.collection('motorcycles').find();
-  	cursor.forEach(function(doc, err){
-  		assert.equal(null,err);
-  		resultArray.push(doc);
-  	}, function(){
-  		db.close();
-  		res.render('', {items:resultArray});
-  	});
-  });
-  });
-	
+//Init app
+const app = express();
 
+//Bring in models
+let Article = require('./models/article');
+
+//load view engine
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+
+//home route
+app.get('/', function(req, res){
+  Article.find({}, function(err, articles){
+    if(err){
+      console.log(err);
+    } else {
+    res.render('index', {
+      title: 'articles',
+      articles: articles
+    });
+  }
+});
+});
+
+
+
+//add route
+app.get('/articles/add', function(req,res){
+  res.render('add_article',{
+    title:'add article'
+
+  });
+});
+//start server
+app.listen(3000, function(){
+  console.log('server started on port 3000...');
+});
   
 
  

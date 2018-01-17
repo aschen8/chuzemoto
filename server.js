@@ -1,30 +1,54 @@
-//req dependences
-var express = require("express");
-var expressHandlebars = require("express-handlebars");
-var bodyParser = require("body-parser");
+const express = require ('express');
+//included with nodejs by default, no need to install it
+const path = require('path');
+const mongoose = require('mongoose');
 
-//set up port to either the host's designated port or 3000
-var PORT = process.env.PORT || 3000;
+mongoose.connect('mongodb://localhost/chuzemoto_motos');
+let db = mongoose.connection;
 
-//instantiate express app
-var app = express();
-
-//set up express router
-var router= express.Router();
-
-//Designate public folder as static directory
-app.use(express.static(_dirname + "/public"));
-
-//connect Handlebars to our Express app
-app.engine("handlebars", expressHandlebars({
-
-}))
-//Have every request go through our router middleware
-app.use(router);
-
-//listen on the port
-app.listen(PORT, funciton(){
-	console.log("listening on port:" + PORT");
-
+//check connection
+db.once('open',function(){
+	console.log('connected to mongodb');
+});
+//check for db errors
+db.on('error', function(err){
+	console.log(err);
 });
 
+//Init app
+const app = express();
+
+//Bring in models
+let Article = require('./models/article');
+
+//load view engine
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+
+//home route
+app.get('/', function(req, res){
+	Article.find({}, function(err, articles){
+		if(err){
+			console.log(err);
+		} else {
+		res.render('index', {
+			title: 'articles',
+			articles: articles
+		});
+	}
+});
+});
+
+
+
+//add route
+app.get('/articles/add', function(req,res){
+	res.render('add_article',{
+		title:'add article'
+
+	});
+});
+//start server
+app.listen(3000, function(){
+	console.log('server started on port 3000...');
+});
