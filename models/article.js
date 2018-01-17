@@ -3,19 +3,26 @@ let mongoose = require ('mongoose');
 //articles schema
 
 let articleSchema = mongoose.Schema({
-	title:{
+	name:{
 		type: String,
 		required: true
 	},
-	author:{
+	make:{
         type: String,
 		required: true
 	},
-	body:{
+	category:{
         type: String,
 		required: true
-	}
-
+	},
+  hp:{
+        type: Number,
+		required: true
+	},
+  height:{
+        type: Number,
+    required: true
+  },
 
 });
 
