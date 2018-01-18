@@ -2,7 +2,7 @@ const express = require ('express');
 //included with nodejs by default, no need to install it
 const path = require('path');
 const mongoose = require('mongoose');
-
+//connects to Mongodb
 mongoose.connect('mongodb://localhost/chuzemoto_motos');
 let db = mongoose.connection;
 
@@ -21,19 +21,27 @@ const app = express();
 //Bring in models
 let Article = require('./models/article');
 
-//load view engine
+//load view engine(this is taken from traversy video)
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+// //load view engine
+// app.use(express.static(__dirname + '/public'));
+
 //home route
 app.get('/', function(req, res){
-	Article.find({}, function(err, articles){
+//this is not the articles database
+	Article.find({}, function(err, motorcycles){
 		if(err){
 			console.log(err);
 		} else {
 		res.render('index', {
-			title: 'articles',
-			articles: articles
+			name: 'motorcycles',
+			make: '',
+			category: '',
+			hp: '',
+			height: '',
+			motorcycles : motorcycles
 		});
 	}
 });

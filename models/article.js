@@ -22,8 +22,13 @@ let articleSchema = mongoose.Schema({
   height:{
         type: Number,
     required: true
-  },
+  }
 
 });
 
-let Article = module.exports = mongoose.model('Article', articleSchema);
+let Article = module.exports = mongoose.model('motorcycles', articleSchema);
+
+// //get motorcycles
+// module.exports.getMotos = function(callback, limit){
+// 	motorcycles.find(callback).limit(limit);
+// }
