@@ -47,7 +47,13 @@ app.get('/', function(req, res){
 });
 });
 
+//add route to bikefit
+app.get('/bikefit', function(req,res){
+	res.render('bikefit',{
+		title:'bikefit'
 
+	});
+});
 
 //add route
 app.get('/articles/add', function(req,res){
