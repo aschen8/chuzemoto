@@ -54,7 +54,7 @@ Article.find({}, function(err, motorcycles){
 		console.log(err);
 	} else {
 	res.render('bikefit', {
-		name: 'motorcycles',
+		title: 'Your Fitted Motorcycles',
 		make: '',
 		category: '',
 		hp: '',

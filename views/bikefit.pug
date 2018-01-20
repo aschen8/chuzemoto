@@ -17,15 +17,16 @@ html(lang='en-US')
       .container
         #textArea.col-sm-12.col-xl-12.text-center
           p
-            | Chuzemoto text
+            | Select your inseam using the box below!
         #inputArea.col-sm-12.col-xl-12
           form#bikeform.text-center
-            input#userInput(type='text', required='', pattern='[a-zA-Z\s]+', placeholder='Enter your inseam')
+            input#userInput(type='number', required='', min="20", max="50", placeholder='0')
             select#inlineFormCustomSelect.custom-select.mb-2.mr-sm-2.mb-sm-0
               option(selected='', value='default') Inches
             button#submit-btn.btn(type='submit') Submit
             span#errorText
     block content
+    h1 #{title}
       h1 #{name}
       h1 #{make}
       h1 #{category}
@@ -34,11 +35,14 @@ html(lang='en-US')
 
       ul
         each motorcycle, i in motorcycles
-           li= motorcycle.name
-           li= motorcycle.make
-           li= motorcycle.category
-           li= motorcycle.hp
-           li= motorcycle.height
+              ol= "name: "+ motorcycle.name
+              ol= "make: "+ motorcycle.make
+              ol= "category: "+ motorcycle.category
+              ol= "horsepower: "+ motorcycle.hp
+              ol= "height: "+ motorcycle.height
+              br
+    block content
+      h1 hello testing
     .row
       #bikeArea.col-sm-12.col-lg-12.text-center
     .row
