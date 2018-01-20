@@ -47,21 +47,32 @@ app.get('/', function(req, res){
 });
 });
 
-//add route to bikefit
-app.get('/bikefit', function(req,res){
-	res.render('bikefit',{
-		title:'bikefit'
-
+// //add route to bikefit
+app.get('/bikefit', function(req, res){
+Article.find({}, function(err, motorcycles){
+	if(err){
+		console.log(err);
+	} else {
+	res.render('bikefit', {
+		name: 'motorcycles',
+		make: '',
+		category: '',
+		hp: '',
+		height: '',
+		motorcycles : motorcycles
 	});
+}
+});
 });
 
-//add route
-app.get('/articles/add', function(req,res){
-	res.render('add_article',{
-		title:'add article'
 
-	});
-});
+// //add route
+// app.get('/articles/add', function(req,res){
+// 	res.render('add_article',{
+// 		title:'add article'
+//
+// 	});
+// });
 //start server
 app.listen(3000, function(){
 	console.log('server started on port 3000...');

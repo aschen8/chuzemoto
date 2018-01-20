@@ -1,3 +1,25 @@
+extends layout
+
+block content
+   h1 #{name}
+   h1 #{make}
+   h1 #{category}
+   h1 #{hp}
+   h1 #{height}
+
+   ul
+     each motorcycle, i in motorcycles
+       li= motorcycle.name
+       li= motorcycle.make
+       li= motorcycle.category
+       li= motorcycle.hp
+       li= motorcycle.height
+
+
+
+
+
+
 doctype html
 html(lang='en-US')
   head
@@ -25,20 +47,6 @@ html(lang='en-US')
               option(selected='', value='default') Inches
             button#submit-btn.btn(type='submit') Submit
             span#errorText
-    block content
-      h1 #{name}
-      h1 #{make}
-      h1 #{category}
-      h1 #{hp}
-      h1 #{height}
-
-      ul
-        each motorcycle, i in motorcycles
-           li= motorcycle.name
-           li= motorcycle.make
-           li= motorcycle.category
-           li= motorcycle.hp
-           li= motorcycle.height
     .row
       #bikeArea.col-sm-12.col-lg-12.text-center
     .row
