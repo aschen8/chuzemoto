@@ -1,79 +1,48 @@
-const express = require ('express');
-//included with nodejs by default, no need to install it
-const path = require('path');
-const mongoose = require('mongoose');
-//connects to Mongodb
-mongoose.connect('mongodb://localhost/chuzemoto_motos');
-let db = mongoose.connection;
+// server.js
 
-//check connection
-db.once('open',function(){
-	console.log('connected to mongodb');
-});
-//check for db errors
-db.on('error', function(err){
-	console.log(err);
-});
+// LOAD THE PACKAGES
+var express = require("express")
+var app = express();    // creating an express framework for the app
+var mongoose = require("mongoose")
+var config  = require('./config')
+var morgan = require ('morgan')
+var path = require('path')
+var bodyParser = require('body-parser')
 
-//Init app
-const app = express();
+// APP CONFIGURATION
 
-//Bring in models
-let Article = require('./models/article');
+// use body parser so we can grab info from POST requests
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
 
-//load view engine(this is taken from traversy video)
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+// configure our app to handle CORS requests
+app.use(function(req, res, next) {
+	res.setHeader('Access-Control-Allow-Origin', '*')
+	res.setHeader('Access-Control-Allow-Methods', 'GET, POST')
+	res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization')
+	next()
+})
 
-// //load view engine
-// app.use(express.static(__dirname + '/public'));
+// log all requests on the console
+app.use(morgan('dev'))
 
-//home route
-app.get('/', function(req, res){
-//this is not the articles database
-	Article.find({}, function(err, motorcycles){
-		if(err){
-			console.log(err);
-		} else {
-		res.render('index', {
-			name: 'motorcycles',
-			make: '',
-			category: '',
-			hp: '',
-			height: '',
-			motorcycles : motorcycles
-		});
-	}
-});
-});
+// connect to our database
+mongoose.connect(config.database);
 
-// //add route to bikefit
-app.get('/bikefit', function(req, res){
-Article.find({}, function(err, motorcycles){
-	if(err){
-		console.log(err);
-	} else {
-	res.render('bikefit', {
-		title: 'Your Fitted Motorcycles',
-		make: '',
-		category: '',
-		hp: '',
-		height: '',
-		motorcycles : motorcycles
-	});
-}
-});
-});
+// sets up ejs as view engine
+app.set("view engine", "ejs"
+// app.set('views' , path.join(_dirname, '/public/views'))
+	
+// set static files location
+// used for requests that our front end will make
+app.use(express.static(_dirname + '/public'))
+
+//ROUTES FOR OUR API
+var apiRoutes = require('./app/routes/routes.js')(app, express)
+
+// Start The server
+app.listen(config.port)
+console.log('The magic happens on port ' + config.port)
 
 
-// //add route
-// app.get('/articles/add', function(req,res){
-// 	res.render('add_article',{
-// 		title:'add article'
-//
-// 	});
-// });
-//start server
-app.listen(3000, function(){
-	console.log('server started on port 3000...');
-});
+
